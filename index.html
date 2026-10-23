@@ -1,0 +1,926 @@
+=<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nexus.Online — Sites que vendem no Google Maps</title>
+<meta name="description" content="Agência Nexus.Online: criamos sites profissionais para empresas que querem aparecer e vender mais no Google Maps. Tiago, Felipe e Vitor.">
+<style>
+:root{
+--bg:#0a0a0c;
+--bg-2:#0f0f12;
+--card:#141418;
+--card-2:#17171c;
+--border:#232329;
+--text:#e8e8ec;
+--muted:#8a8a93;
+--accent:#3b82f6;
+--accent-2:#60a5fa;
+--accent-glow:rgba(59,130,246,.35);
+--whatsapp:#25d366;
+--radius:14px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+background:var(--bg);
+color:var(--text);
+line-height:1.6;
+-webkit-font-smoothing:antialiased;
+overflow-x:hidden;
+}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+.container{max-width:1200px;margin:0 auto;padding:0 24px}
+/* ===== ANIMATIONS ===== */
+@keyframes fadeInUp{
+from{opacity:0;transform:translateY(40px)}
+to{opacity:1;transform:translateY(0)}
+}
+@keyframes fadeIn{
+from{opacity:0}
+to{opacity:1}
+}
+@keyframes slideInLeft{
+from{opacity:0;transform:translateX(-60px)}
+to{opacity:1;transform:translateX(0)}
+}
+@keyframes slideInRight{
+from{opacity:0;transform:translateX(60px)}
+to{opacity:1;transform:translateX(0)}
+}
+@keyframes scaleIn{
+from{opacity:0;transform:scale(.9)}
+to{opacity:1;transform:scale(1)}
+}
+@keyframes float{
+0%,100%{transform:translateY(0)}
+50%{transform:translateY(-10px)}
+}
+@keyframes pulse{
+0%{box-shadow:0 0 0 0 var(--accent-glow)}
+70%{box-shadow:0 0 0 10px transparent}
+100%{box-shadow:0 0 0 0 transparent}
+}
+@keyframes gradientShift{
+0%{background-position:0% 50%}
+50%{background-position:100% 50%}
+100%{background-position:0% 50%}
+}
+@keyframes shimmer{
+0%{background-position:-200% 0}
+100%{background-position:200% 0}
+}
+@keyframes typing{
+from{width:0}
+to{width:100%}
+}
+@keyframes blink{
+50%{border-color:transparent}
+}
+@keyframes rotateGlow{
+0%{transform:rotate(0deg)}
+100%{transform:rotate(360deg)}
+}
+.animate-on-scroll{
+opacity:0;
+transform:translateY(40px);
+transition:all .8s cubic-bezier(.4,0,.2,1);
+}
+.animate-on-scroll.visible{
+opacity:1;
+transform:translateY(0);
+}
+.animate-on-scroll.delay-1{transition-delay:.1s}
+.animate-on-scroll.delay-2{transition-delay:.2s}
+.animate-on-scroll.delay-3{transition-delay:.3s}
+.animate-on-scroll.delay-4{transition-delay:.4s}
+/* ===== NAV ===== */
+header{
+position:sticky;top:0;z-index:100;
+background:rgba(10,10,12,.82);
+backdrop-filter:blur(14px);
+border-bottom:1px solid var(--border);
+animation:fadeIn .6s ease;
+}
+.nav{display:flex;align-items:center;justify-content:space-between;height:72px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:20px;letter-spacing:-.02em;transition:transform .3s}
+.logo:hover{transform:scale(1.05)}
+.logo-mark{
+width:34px;height:34px;border-radius:9px;
+background:linear-gradient(135deg,var(--accent),#8b5cf6);
+display:grid;place-items:center;color:#fff;font-size:18px;
+box-shadow:0 0 20px var(--accent-glow);
+animation:float 3s ease-in-out infinite;
+}
+.logo span.dot{color:var(--accent-2)}
+.nav-links{display:flex;gap:34px;align-items:center}
+.nav-links a{color:var(--muted);font-size:15px;font-weight:500;transition:all .3s;position:relative}
+.nav-links a::after{
+content:'';position:absolute;bottom:-4px;left:0;width:0;height:2px;
+background:var(--accent);transition:width .3s;
+}
+.nav-links a:hover{color:var(--text)}
+.nav-links a:hover::after{width:100%}
+.btn{
+display:inline-flex;align-items:center;gap:8px;
+padding:11px 22px;border-radius:10px;font-weight:600;font-size:15px;
+cursor:pointer;border:none;transition:all .3s cubic-bezier(.4,0,.2,1);white-space:nowrap;
+position:relative;overflow:hidden;
+}
+.btn::before{
+content:'';position:absolute;top:50%;left:50%;width:0;height:0;
+background:rgba(255,255,255,.2);border-radius:50%;
+transform:translate(-50%,-50%);transition:width .6s,height .6s;
+}
+.btn:hover::before{width:300px;height:300px}
+.btn-primary{background:var(--accent);color:#fff;box-shadow:0 4px 20px var(--accent-glow)}
+.btn-primary:hover{background:var(--accent-2);transform:translateY(-2px);box-shadow:0 8px 30px var(--accent-glow)}
+.btn-ghost{background:transparent;color:var(--text);border:1px solid var(--border)}
+.btn-ghost:hover{border-color:var(--accent);color:var(--accent-2);transform:translateY(-2px)}
+.menu-toggle{display:none;background:none;border:none;color:var(--text);font-size:26px;cursor:pointer}
+/* ===== HERO ===== */
+.hero{position:relative;padding:90px 0 70px;text-align:center;overflow:hidden}
+.hero::before{
+content:"";position:absolute;inset:0;
+background:radial-gradient(ellipse 60% 50% at 50% 0%,rgba(59,130,246,.18),transparent 70%);
+pointer-events:none;
+}
+.hero::after{
+content:"";position:absolute;top:-50%;left:-50%;width:200%;height:200%;
+background:conic-gradient(from 0deg,transparent,rgba(59,130,246,.1),transparent 30%);
+animation:rotateGlow 20s linear infinite;
+pointer-events:none;
+}
+.badge{
+display:inline-flex;align-items:center;gap:8px;
+padding:7px 16px;border-radius:999px;
+background:rgba(59,130,246,.1);border:1px solid rgba(59,130,246,.3);
+color:var(--accent-2);font-size:13px;font-weight:600;margin-bottom:26px;
+animation:fadeInUp .8s ease;
+}
+.badge .pulse{width:8px;height:8px;border-radius:50%;background:var(--accent-2);animation:pulse 2s infinite}
+.hero h1{
+font-size:clamp(34px,5.5vw,62px);font-weight:800;line-height:1.08;
+letter-spacing:-.03em;max-width:880px;margin:0 auto 22px;
+animation:fadeInUp .8s ease .2s both;
+}
+.hero h1 .grad{
+background:linear-gradient(120deg,var(--accent-2),#a78bfa,#ec4899,var(--accent-2));
+background-size:300% 300%;
+-webkit-background-clip:text;background-clip:text;color:transparent;
+animation:gradientShift 4s ease infinite;
+}
+.hero p{
+font-size:clamp(16px,2vw,19px);color:var(--muted);max-width:620px;margin:0 auto 36px;
+animation:fadeInUp .8s ease .4s both;
+}
+.hero-cta{
+display:flex;gap:14px;justify-content:center;flex-wrap:wrap;
+animation:fadeInUp .8s ease .6s both;
+}
+.hero-stats{
+display:flex;gap:48px;justify-content:center;margin-top:60px;flex-wrap:wrap;
+animation:fadeInUp .8s ease .8s both;
+}
+.stat{transition:transform .3s}
+.stat:hover{transform:scale(1.1)}
+.stat .num{
+font-size:34px;font-weight:800;color:var(--text);letter-spacing:-.02em;
+background:linear-gradient(120deg,var(--accent-2),#a78bfa);
+-webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.stat .lbl{font-size:14px;color:var(--muted);margin-top:2px}
+/* ===== SECTION HEADERS ===== */
+section{padding:80px 0}
+.sec-head{text-align:center;max-width:640px;margin:0 auto 50px}
+.eyebrow{
+color:var(--accent-2);font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-bottom:12px;
+display:inline-block;position:relative;
+}
+.eyebrow::after{
+content:'';position:absolute;bottom:-6px;left:50%;transform:translateX(-50%);
+width:40px;height:2px;background:var(--accent);border-radius:2px;
+}
+.sec-head h2{font-size:clamp(28px,4vw,42px);font-weight:800;letter-spacing:-.02em;line-height:1.15;margin-bottom:14px}
+.sec-head p{color:var(--muted);font-size:17px}
+/* ===== PROBLEM / WHY ===== */
+.why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.why-card{
+background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+padding:30px;transition:all .4s cubic-bezier(.4,0,.2,1);position:relative;overflow:hidden;
+}
+.why-card::before{
+content:'';position:absolute;top:0;left:0;width:100%;height:3px;
+background:linear-gradient(90deg,var(--accent),#8b5cf6);
+transform:scaleX(0);transform-origin:left;transition:transform .4s;
+}
+.why-card:hover{border-color:var(--accent);transform:translateY(-8px);box-shadow:0 20px 40px rgba(0,0,0,.3)}
+.why-card:hover::before{transform:scaleX(1)}
+.why-icon{
+width:48px;height:48px;border-radius:12px;display:grid;place-items:center;
+background:rgba(59,130,246,.12);color:var(--accent-2);font-size:22px;margin-bottom:18px;
+transition:all .3s;
+}
+.why-card:hover .why-icon{transform:scale(1.1) rotate(5deg);background:rgba(59,130,246,.2)}
+.why-card h3{font-size:19px;font-weight:700;margin-bottom:8px}
+.why-card p{color:var(--muted);font-size:15px}
+/* ===== PORTFOLIO ===== */
+.portfolio{background:var(--bg-2)}
+.port-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.port-card{
+background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+overflow:hidden;transition:all .4s cubic-bezier(.4,0,.2,1);
+}
+.port-card:hover{border-color:var(--accent);transform:translateY(-8px) scale(1.02);box-shadow:0 25px 50px rgba(0,0,0,.4)}
+.port-img{height:190px;position:relative;overflow:hidden}
+.port-img .ph{width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.4,0,.2,1)}
+.port-card:hover .ph{transform:scale(1.1)}
+.port-img::after{
+content:'';position:absolute;inset:0;
+background:linear-gradient(to top,rgba(0,0,0,.6),transparent);
+opacity:0;transition:opacity .4s;
+}
+.port-card:hover .port-img::after{opacity:1}
+.port-body{padding:22px}
+.port-tag{
+color:var(--accent-2);font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px;
+display:inline-block;transition:transform .3s;
+}
+.port-card:hover .port-tag{transform:translateX(5px)}
+.port-body h3{font-size:19px;font-weight:700;margin-bottom:8px;transition:color .3s}
+.port-card:hover .port-body h3{color:var(--accent-2)}
+.port-body p{color:var(--muted);font-size:14px;margin-bottom:16px}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{
+background:var(--card-2);border:1px solid var(--border);
+padding:5px 12px;border-radius:7px;font-size:12px;color:var(--muted);font-weight:500;
+transition:all .3s;
+}
+.port-card:hover .chip{border-color:var(--accent);color:var(--accent-2)}
+/* ===== PROCESS ===== */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;counter-reset:step}
+.step{
+background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+padding:28px;position:relative;counter-increment:step;
+transition:all .4s cubic-bezier(.4,0,.2,1);overflow:hidden;
+}
+.step::before{
+content:counter(step,decimal-leading-zero);
+font-size:38px;font-weight:800;color:rgba(59,130,246,.25);letter-spacing:-.03em;
+transition:all .4s;
+}
+.step::after{
+content:'';position:absolute;bottom:0;left:0;width:100%;height:3px;
+background:linear-gradient(90deg,var(--accent),#8b5cf6);
+transform:scaleX(0);transition:transform .4s;
+}
+.step:hover{border-color:var(--accent);transform:translateY(-8px)}
+.step:hover::before{color:var(--accent-2);transform:scale(1.1)}
+.step:hover::after{transform:scaleX(1)}
+.step h3{font-size:17px;font-weight:700;margin:10px 0 8px}
+.step p{color:var(--muted);font-size:14px}
+/* ===== PRICING ===== */
+.pricing{background:var(--bg-2)}
+.price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;align-items:start}
+.price-card{
+background:var(--card);border:1px solid var(--border);border-radius:18px;padding:34px;
+position:relative;transition:all .4s cubic-bezier(.4,0,.2,1);overflow:hidden;
+}
+.price-card::before{
+content:'';position:absolute;top:0;left:0;right:0;height:100%;
+background:linear-gradient(180deg,rgba(59,130,246,.05),transparent);
+opacity:0;transition:opacity .4s;
+}
+.price-card:hover{transform:translateY(-8px)}
+.price-card:hover::before{opacity:1}
+.price-card.featured{border-color:var(--accent);box-shadow:0 0 40px var(--accent-glow)}
+.price-card.featured::after{
+content:"MAIS VENDIDO";position:absolute;top:-12px;left:50%;transform:translateX(-50%);
+background:linear-gradient(135deg,var(--accent),#8b5cf6);color:#fff;font-size:11px;font-weight:700;letter-spacing:.08em;
+padding:5px 14px;border-radius:999px;
+animation:pulse 2s infinite;
+}
+.price-name{font-size:15px;font-weight:600;color:var(--muted);margin-bottom:6px}
+.price-val{
+font-size:42px;font-weight:800;letter-spacing:-.03em;
+background:linear-gradient(120deg,var(--text),var(--accent-2));
+-webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.price-val small{font-size:16px;color:var(--muted);font-weight:500;-webkit-text-fill-color:var(--muted)}
+.price-desc{color:var(--muted);font-size:14px;margin:10px 0 24px}
+.price-list{list-style:none;margin-bottom:28px}
+.price-list li{
+display:flex;gap:10px;align-items:flex-start;font-size:14px;color:var(--text);padding:7px 0;
+transition:transform .3s;
+}
+.price-list li:hover{transform:translateX(5px)}
+.price-list li::before{content:"✓";color:var(--accent-2);font-weight:700;flex-shrink:0}
+.price-card .btn{width:100%;justify-content:center}
+/* ===== TEAM ===== */
+.team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;max-width:900px;margin:0 auto}
+.member{
+background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+padding:34px;text-align:center;transition:all .4s cubic-bezier(.4,0,.2,1);position:relative;overflow:hidden;
+}
+.member::before{
+content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;
+background:conic-gradient(from 0deg,transparent,rgba(59,130,246,.1),transparent 30%);
+opacity:0;transition:opacity .4s;
+}
+.member:hover{border-color:var(--accent);transform:translateY(-8px)}
+.member:hover::before{opacity:1;animation:rotateGlow 4s linear infinite}
+.avatar{
+width:88px;height:88px;border-radius:50%;margin:0 auto 18px;
+display:grid;place-items:center;font-size:32px;font-weight:800;color:#fff;
+background:linear-gradient(135deg,var(--accent),#8b5cf6);
+transition:all .4s;position:relative;z-index:1;
+}
+.member:hover .avatar{transform:scale(1.1) rotate(5deg);box-shadow:0 10px 30px var(--accent-glow)}
+.member h3{font-size:20px;font-weight:700;position:relative;z-index:1}
+.member .role{color:var(--accent-2);font-size:14px;font-weight:600;margin-top:4px;position:relative;z-index:1}
+.member p{color:var(--muted);font-size:14px;margin-top:12px;position:relative;z-index:1}
+/* ===== CTA FINAL ===== */
+.cta-final{
+text-align:center;padding:80px 40px;border-radius:24px;
+background:linear-gradient(135deg,rgba(59,130,246,.15),rgba(139,92,246,.1));
+border:1px solid rgba(59,130,246,.25);position:relative;overflow:hidden;
+}
+.cta-final::before{
+content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;
+background:conic-gradient(from 0deg,transparent,rgba(59,130,246,.15),transparent 30%);
+animation:rotateGlow 15s linear infinite;
+}
+.cta-final h2{font-size:clamp(28px,4vw,40px);font-weight:800;letter-spacing:-.02em;margin-bottom:14px;position:relative;z-index:1}
+.cta-final p{color:var(--muted);font-size:17px;max-width:520px;margin:0 auto 30px;position:relative;z-index:1}
+.cta-final .hero-cta{position:relative;z-index:1}
+/* ===== FOOTER ===== */
+footer{border-top:1px solid var(--border);padding:50px 0 30px;margin-top:40px}
+.foot-grid{display:flex;justify-content:space-between;flex-wrap:wrap;gap:30px;margin-bottom:30px}
+.foot-col h4{font-size:14px;font-weight:700;margin-bottom:14px}
+.foot-col a,.foot-col p{display:block;color:var(--muted);font-size:14px;margin-bottom:8px;transition:all .3s}
+.foot-col a:hover{color:var(--accent-2);transform:translateX(5px)}
+.foot-bottom{border-top:1px solid var(--border);padding-top:24px;text-align:center;color:var(--muted);font-size:13px}
+/* ===== WHATSAPP FLOAT ===== */
+.wa-float{
+position:fixed;bottom:26px;right:26px;z-index:99;
+width:58px;height:58px;border-radius:50%;background:var(--whatsapp);
+display:grid;place-items:center;color:#fff;font-size:30px;
+box-shadow:0 8px 24px rgba(37,211,102,.4);transition:all .3s;
+animation:float 3s ease-in-out infinite;
+}
+.wa-float:hover{transform:scale(1.15);box-shadow:0 12px 32px rgba(37,211,102,.5)}
+.wa-float::before{
+content:'';position:absolute;inset:-4px;border-radius:50%;
+border:2px solid var(--whatsapp);opacity:0;
+animation:pulse 2s infinite;
+}
+/* ===== RESPONSIVE ===== */
+@media(max-width:900px){
+.nav-links{display:none}
+.menu-toggle{display:block}
+.nav-links.open{
+display:flex;flex-direction:column;position:absolute;top:72px;left:0;right:0;
+background:var(--bg-2);padding:24px;gap:18px;border-bottom:1px solid var(--border);
+animation:fadeIn .3s ease;
+}
+.why-grid,.port-grid,.steps,.price-grid,.team-grid{grid-template-columns:1fr}
+.hero-stats{gap:30px}
+section{padding:60px 0}
+}
+@media(min-width:600px) and (max-width:900px){
+.port-grid,.price-grid,.team-grid{grid-template-columns:repeat(2,1fr)}
+.steps{grid-template-columns:repeat(2,1fr)}
+}
+/* ===== PARTICLES BACKGROUND ===== */
+.particles{
+position:fixed;top:0;left:0;width:100%;height:100%;
+pointer-events:none;z-index:-1;overflow:hidden;
+}
+.particle{
+position:absolute;width:4px;height:4px;background:var(--accent);
+border-radius:50%;opacity:.3;animation:float 6s ease-in-out infinite;
+}
+</style>
+</head>
+<body>
+<!-- PARTICLES -->
+<div class="particles" id="particles"></div>
+<!-- NAV -->
+<header>
+<div class="container nav">
+<a href="#inicio" class="logo">
+<span class="logo-mark">⚡</span>
+NEXUS<span class="dot">.Online</span>
+</a>
+<nav class="nav-links" id="navLinks">
+<a href="#inicio">Início</a>
+<a href="#servicos">Serviços</a>
+<a href="#portfolio">Portfólio</a>
+<a href="#processo">Processo</a>
+<a href="#planos">Planos</a>
+<a href="#contato">Contato</a>
+<a href="#contato" class="btn btn-primary">Solicitar orçamento</a>
+</nav>
+<button class="menu-toggle" onclick="document.getElementById('navLinks').classList.toggle('open')">☰</button>
+</div>
+</header>
+<!-- HERO -->
+<section class="hero" id="inicio">
+<div class="container">
+<span class="badge"><span class="pulse"></span> Especialistas em Google Maps</span>
+<h1>Sites que fazem sua empresa <span class="grad">aparecer e vender</span> no Google Maps</h1>
+<p>Transformamos fichas do Google Maps em máquinas de clientes. Criamos sites profissionais que convertem as buscas locais da sua região em vendas reais.</p>
+<div class="hero-cta">
+<a href="#contato" class="btn btn-primary">Quero meu site →</a>
+<a href="#portfolio" class="btn btn-ghost">Ver portfólio</a>
+</div>
+<div class="hero-stats">
+<div class="stat"><div class="num" data-count="120">+120</div><div class="lbl">Sites entregues</div></div>
+<div class="stat"><div class="num">3x</div><div class="lbl">Mais ligações</div></div>
+<div class="stat"><div class="num">7 dias</div><div class="lbl">Prazo médio</div></div>
+</div>
+</div>
+</section>
+<!-- POR QUE / PROBLEMA -->
+<section id="servicos">
+<div class="container">
+<div class="sec-head animate-on-scroll">
+<div class="eyebrow">O problema</div>
+<h2>Sua empresa está no Maps, mas não vende?</h2>
+<p>A maioria das empresas perde clientes todos os dias porque a ficha do Google não passa confiança. Nós resolvemos isso.</p>
+</div>
+<div class="why-grid">
+<div class="why-card animate-on-scroll delay-1">
+<div class="why-icon">📍</div>
+<h3>Ficha fraca no Maps</h3>
+<p>Sem site profissional linkado, o cliente fecha a aba e liga pro concorrente que aparece melhor posicionado.</p>
+</div>
+<div class="why-card animate-on-scroll delay-2">
+<div class="why-icon">📱</div>
+<h3>Site que não converte</h3>
+<p>Página lenta, sem botão de WhatsApp e sem formulário faz você perder leads que já estavam prontos pra comprar.</p>
+</div>
+<div class="why-card animate-on-scroll delay-3">
+<div class="why-icon">🚀</div>
+<h3>SEO local ignorado</h3>
+<p>Sem otimização para a sua cidade e bairro, você simplesmente não aparece quando o cliente pesquisa na sua região.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- PORTFÓLIO -->
+<section class="portfolio" id="portfolio">
+<div class="container">
+<div class="sec-head animate-on-scroll">
+<div class="eyebrow">Portfólio</div>
+<h2>Sites que já fizemos decolar no Maps</h2>
+<p>Projetos reais para negócios locais que hoje recebem clientes direto do Google.</p>
+</div>
+<div class="port-grid">
+<div class="port-card animate-on-scroll delay-1">
+<div class="port-img"><svg class="ph" viewBox="0 0 400 190" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="g1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1e3a8a"/><stop offset="1" stop-color="#3b82f6"/></linearGradient></defs><rect width="400" height="190" fill="url(#g1)"/><circle cx="320" cy="50" r="60" fill="#fff" opacity=".08"/><text x="40" y="110" fill="#fff" font-family="Arial" font-size="26" font-weight="bold">Clínica Dental</text><text x="40" y="140" fill="#bfdbfe" font-family="Arial" font-size="14">Agendamento online</text></svg></div>
+<div class="port-body">
+<div class="port-tag">Saúde</div>
+<h3>Clínica Odontológica</h3>
+<p>Site com agendamento online e integração direta com a ficha do Google Maps.</p>
+<div class="chips"><span class="chip">HTML</span><span class="chip">CSS</span><span class="chip">SEO Local</span></div>
+</div>
+</div>
+<div class="port-card animate-on-scroll delay-2">
+<div class="port-img"><svg class="ph" viewBox="0 0 400 190" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="g2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7c2d12"/><stop offset="1" stop-color="#ea580c"/></linearGradient></defs><rect width="400" height="190" fill="url(#g2)"/><rect x="280" y="30" width="90" height="130" rx="8" fill="#fff" opacity=".1"/><text x="40" y="110" fill="#fff" font-family="Arial" font-size="26" font-weight="bold">Oficina Mecânica</text><text x="40" y="140" fill="#fed7aa" font-family="Arial" font-size="14">Orçamento via WhatsApp</text></svg></div>
+<div class="port-body">
+<div class="port-tag">Automotivo</div>
+<h3>Oficina Mecânica</h3>
+<p>Landing page focada em orçamento rápido pelo WhatsApp, otimizada para busca local.</p>
+<div class="chips"><span class="chip">Landing Page</span><span class="chip">WhatsApp</span><span class="chip">Analytics</span></div>
+</div>
+</div>
+<div class="port-card animate-on-scroll delay-3">
+<div class="port-img"><svg class="ph" viewBox="0 0 400 190" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="g3" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#14532d"/><stop offset="1" stop-color="#16a34a"/></linearGradient></defs><rect width="400" height="190" fill="url(#g3)"/><circle cx="60" cy="150" r="70" fill="#fff" opacity=".07"/><text x="40" y="110" fill="#fff" font-family="Arial" font-size="26" font-weight="bold">Restaurante</text><text x="40" y="140" fill="#bbf7d0" font-family="Arial" font-size="14">Cardápio digital + reservas</text></svg></div>
+<div class="port-body">
+<div class="port-tag">Gastronomia</div>
+<h3>Restaurante &amp; Bar</h3>
+<p>Cardápio digital com reservas e rota direta do Google Maps até a porta.</p>
+<div class="chips"><span class="chip">Next.js</span><span class="chip">Maps API</span><span class="chip">Mobile-first</span></div>
+</div>
+</div>
+<div class="port-card animate-on-scroll delay-1">
+<div class="port-img"><svg class="ph" viewBox="0 0 400 190" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="g4" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#581c87"/><stop offset="1" stop-color="#9333ea"/></linearGradient></defs><rect width="400" height="190" fill="url(#g4)"/><rect x="40" y="40" width="120" height="20" rx="4" fill="#fff" opacity=".15"/><rect x="40" y="70" width="200" height="12" rx="4" fill="#fff" opacity=".1"/><text x="40" y="120" fill="#fff" font-family="Arial" font-size="26" font-weight="bold">Salão de Beleza</text><text x="40" y="150" fill="#e9d5ff" font-family="Arial" font-size="14">Agenda online 24h</text></svg></div>
+<div class="port-body">
+<div class="port-tag">Beleza</div>
+<h3>Salão de Beleza</h3>
+<p>Sistema de agenda online integrado à ficha do Google, com confirmação automática.</p>
+<div class="chips"><span class="chip">React</span><span class="chip">Tailwind</span><span class="chip">Agenda</span></div>
+</div>
+</div>
+<div class="port-card animate-on-scroll delay-2">
+<div class="port-img"><svg class="ph" viewBox="0 0 400 190" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="g5" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#78350f"/><stop offset="1" stop-color="#d97706"/></linearGradient></defs><rect width="400" height="190" fill="url(#g5)"/><circle cx="340" cy="140" r="80" fill="#fff" opacity=".08"/><text x="40" y="110" fill="#fff" font-family="Arial" font-size="26" font-weight="bold">Pet Shop</text><text x="40" y="140" fill="#fde68a" font-family="Arial" font-size="14">Banho &amp; tosa com horário</text></svg></div>
+<div class="port-body">
+<div class="port-tag">Pet</div>
+<h3>Pet Shop &amp; Veterinária</h3>
+<p>Site institucional com serviços, horários e botão de emergência veterinária.</p>
+<div class="chips"><span class="chip">HTML</span><span class="chip">JavaScript</span><span class="chip">SEO</span></div>
+</div>
+</div>
+<div class="port-card animate-on-scroll delay-3">
+<div class="port-img"><svg class="ph" viewBox="0 0 400 190" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="g6" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1e293b"/><stop offset="1" stop-color="#475569"/></linearGradient></defs><rect width="400" height="190" fill="url(#g6)"/><rect x="260" y="40" width="110" height="110" rx="10" fill="#fff" opacity=".08"/><text x="40" y="110" fill="#fff" font-family="Arial" font-size="26" font-weight="bold">Advocacia</text><text x="40" y="140" fill="#cbd5e1" font-family="Arial" font-size="14">Credibilidade &amp; captação</text></svg></div>
+<div class="port-body">
+<div class="port-tag">Jurídico</div>
+<h3>Escritório de Advocacia</h3>
+<p>Site institucional com foco em credibilidade e captação de consultas pelo Maps.</p>
+<div class="chips"><span class="chip">HTML</span><span class="chip">CSS</span><span class="chip">Formulário</span></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- PROCESSO -->
+<section id="processo">
+<div class="container">
+<div class="sec-head animate-on-scroll">
+<div class="eyebrow">Processo</div>
+<h2>Do Maps ao primeiro cliente em 4 passos</h2>
+<p>Um fluxo simples, transparente e rápido. Você acompanha tudo de perto.</p>
+</div>
+<div class="steps">
+<div class="step animate-on-scroll delay-1">
+<h3>Diagnóstico</h3>
+<p>Analisamos sua ficha atual no Google Maps e identificamos onde você está perdendo clientes.</p>
+</div>
+<div class="step animate-on-scroll delay-2">
+<h3>Projeto</h3>
+<p>Criamos o layout do site focado em conversão e na sua identidade visual.</p>
+</div>
+<div class="step animate-on-scroll delay-3">
+<h3>Desenvolvimento</h3>
+<p>Programamos o site rápido, responsivo e otimizado para SEO local da sua cidade.</p>
+</div>
+<div class="step animate-on-scroll delay-4">
+<h3>Publicação</h3>
+<p>Colocamos no ar, vinculamos ao Google Maps e começamos a trazer ligações.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- PLANOS -->
+<section class="pricing" id="planos">
+<div class="container">
+<div class="sec-head animate-on-scroll">
+<div class="eyebrow">Planos</div>
+<h2>Investimento que se paga com poucos clientes</h2>
+<p>Escolha o plano ideal pro tamanho do seu negócio. Sem mensalidade surpresa.</p>
+</div>
+<div class="price-grid">
+<div class="price-card animate-on-scroll delay-1">
+<div class="price-name">Essencial</div>
+<div class="price-val">R$ 697<small>/único</small></div>
+<p class="price-desc">Pra quem quer sair do zero e aparecer no Maps com profissionalismo.</p>
+<ul class="price-list">
+<li>Site de 1 página (landing)</li>
+<li>Botão de WhatsApp flutuante</li>
+<li>Otimização SEO local básica</li>
+<li>Vinculação ao Google Maps</li>
+<li>Entrega em até 7 dias</li>
+</ul>
+<a href="#contato" class="btn btn-ghost">Começar agora</a>
+</div>
+<div class="price-card featured animate-on-scroll delay-2">
+<div class="price-name">Profissional</div>
+<div class="price-val">R$ 1.297<small>/único</small></div>
+<p class="price-desc">O mais escolhido. Site completo pronto pra converter buscas em vendas.</p>
+<ul class="price-list">
+<li>Site de até 5 páginas</li>
+<li>Formulário + WhatsApp + ligação</li>
+<li>SEO local avançado por bairro</li>
+<li>Galeria de fotos e avaliações</li>
+<li>Integração total com Google Maps</li>
+<li>Suporte por 30 dias</li>
+</ul>
+<a href="#contato" class="btn btn-primary">Quero este plano</a>
+</div>
+<div class="price-card animate-on-scroll delay-3">
+<div class="price-name">Premium</div>
+<div class="price-val">R$ 2.497<small>/único</small></div>
+<p class="price-desc">Pra negócios que querem dominar a região inteira no Google.</p>
+<ul class="price-list">
+<li>Site ilimitado + sistema</li>
+<li>Agendamento / catálogo online</li>
+<li>SEO local multi-bairro</li>
+<li>Otimização completa da ficha GBP</li>
+<li>Relatório mensal de leads</li>
+<li>Suporte por 90 dias</li>
+</ul>
+<a href="#contato" class="btn btn-ghost">Falar com a gente</a>
+</div>
+</div>
+</div>
+</section>
+<!-- SÓCIOS -->
+<section id="socios">
+<div class="container">
+<div class="sec-head animate-on-scroll">
+<div class="eyebrow">Quem somos</div>
+<h2>Três sócios obcecados por te trazer clientes</h2>
+<p>A Nexus.Online nasceu da vontade de ajudar negócios locais a serem encontrados de verdade.</p>
+</div>
+<div class="team-grid">
+<div class="member animate-on-scroll delay-1">
+<div class="avatar">T</div>
+<h3>Tiago</h3>
+<div class="role">Co-fundador &amp; Estratégia</div>
+<p>Cuida do diagnóstico e da estratégia de SEO local pra sua empresa aparecer na frente.</p>
+</div>
+<div class="member animate-on-scroll delay-2">
+<div class="avatar" style="background:linear-gradient(135deg,#8b5cf6,#ec4899)">F</div>
+<h3>Felipe</h3>
+<div class="role">Co-fundador &amp; Design</div>
+<p>Transforma sua marca num site bonito, confiável e feito pra converter visitantes em clientes.</p>
+</div>
+<div class="member animate-on-scroll delay-3">
+<div class="avatar" style="background:linear-gradient(135deg,#06b6d4,#3b82f6)">V</div>
+<h3>Vitor</h3>
+<div class="role">Co-fundador &amp; Desenvolvimento</div>
+<p>Programa sites rápidos, leves e tecnicamente impecáveis pro Google amar e ranquear.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- CTA FINAL / CONTATO -->
+<section id="contato">
+<div class="container">
+<div class="cta-final animate-on-scroll">
+<h2>Pronto pra lotar sua agenda pelo Google Maps?</h2>
+<p>Fale com a gente agora e receba um diagnóstico gratuito da sua ficha no Maps em até 24h.</p>
+<div class="hero-cta">
+<a href="https://wa.me/5500000000000?text=Ol%C3%A1!%20Quero%20um%20site%20pra%20minha%20empresa%20aparecer%20no%20Google%20Maps." class="btn btn-primary" style="background:var(--whatsapp);box-shadow:0 4px 20px rgba(37,211,102,.4)">💬 Chamar no WhatsApp</a>
+<a href="mailto:contato@nexus.online" class="btn btn-ghost">✉ contato@nexus.online</a>
+</div>
+</div>
+</div>
+</section>
+<!-- ANIMAÇÃO 3D - GLOBO TERRESTRE (Original Dark Style - FINAL DO SITE) -->
+<section id="animacao-3d" style="padding:60px 0 40px;position:relative;overflow:hidden">
+<div class="container" style="text-align:center;margin-bottom:24px">
+<div class="sec-head animate-on-scroll">
+<div class="eyebrow">Alcance Global</div>
+<h2>Conectados com o mundo</h2>
+<p>Do Brasil para o mundo — tecnologia sem fronteiras.</p>
+</div>
+</div>
+<div id="canvas-3d" style="width:100%;height:500px;border-radius:var(--radius);border:1px solid var(--border);background:radial-gradient(ellipse at center, #0a1628 0%, #000 100%);margin:0 auto;max-width:1200px;cursor:grab;position:relative;overflow:hidden"></div>
+</section>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+(function(){
+const container = document.getElementById('canvas-3d');
+if (!container || typeof THREE === 'undefined') return;
+
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 1000);
+camera.position.z = 3.2;
+
+const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+renderer.setSize(container.clientWidth, container.clientHeight);
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.4;
+renderer.outputEncoding = THREE.sRGBEncoding;
+container.appendChild(renderer.domElement);
+
+// Luzes
+const ambientLight = new THREE.AmbientLight(0x404040, 1.2);
+scene.add(ambientLight);
+const directionalLight = new THREE.DirectionalLight(0xffffff, 1.8);
+directionalLight.position.set(5, 3, 5);
+scene.add(directionalLight);
+const backLight = new THREE.DirectionalLight(0x3b82f6, 0.3);
+backLight.position.set(-5, -3, -5);
+scene.add(backLight);
+
+// Texturas locais com caminho relativo (funciona no Live Server e Vercel)
+const textureLoader = new THREE.TextureLoader();
+const earthTexture = textureLoader.load('./images/earth-360.jpg');
+const cloudsTexture = textureLoader.load('./images/earth-clouds.png');
+
+// Globo
+const globeGeometry = new THREE.SphereGeometry(1.2, 64, 64);
+const globeMaterial = new THREE.MeshPhongMaterial({
+map: earthTexture,
+specular: new THREE.Color(0x333333),
+shininess: 15
+});
+const globe = new THREE.Mesh(globeGeometry, globeMaterial);
+// Meridiano 0° no centro da textura. Brasil ≈ -51° lon → girar +51° traz o Brasil à frente.
+globe.rotation.y = 51 * (Math.PI / 180);
+globe.rotation.x = 0.15;
+scene.add(globe);
+
+// Nuvens
+const cloudsGeometry = new THREE.SphereGeometry(1.215, 64, 64);
+const cloudsMaterial = new THREE.MeshPhongMaterial({
+map: cloudsTexture,
+transparent: true,
+opacity: 0.3,
+depthWrite: false
+});
+const clouds = new THREE.Mesh(cloudsGeometry, cloudsMaterial);
+globe.add(clouds);
+
+// Atmosfera (glow azul)
+const atmosphereGeometry = new THREE.SphereGeometry(1.28, 64, 64);
+const atmosphereMaterial = new THREE.ShaderMaterial({
+vertexShader: `varying vec3 vNormal; void main() { vNormal = normalize(normalMatrix * normal); gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }`,
+fragmentShader: `varying vec3 vNormal; void main() { float intensity = pow(0.65 - dot(vNormal, vec3(0.0, 0.0, 1.0)), 2.5); gl_FragColor = vec4(0.23, 0.51, 0.96, 1.0) * intensity * 1.2; }`,
+blending: THREE.AdditiveBlending,
+side: THREE.BackSide,
+transparent: true
+});
+scene.add(new THREE.Mesh(atmosphereGeometry, atmosphereMaterial));
+
+// Estrelas
+const starsGeometry = new THREE.BufferGeometry();
+const starPositions = new Float32Array(2000 * 3);
+for (let i = 0; i < 2000; i++) {
+starPositions[i*3]   = (Math.random()-0.5)*100;
+starPositions[i*3+1] = (Math.random()-0.5)*100;
+starPositions[i*3+2] = (Math.random()-0.5)*100;
+}
+starsGeometry.setAttribute('position', new THREE.BufferAttribute(starPositions, 3));
+const stars = new THREE.Points(starsGeometry, new THREE.PointsMaterial({ color: 0xffffff, size: 0.15, transparent: true, opacity: 0.8 }));
+scene.add(stars);
+
+// Marcador pulsante em Brasília
+function latLonToVec3(lat, lon, r) {
+const phi = (90-lat)*Math.PI/180, theta = (lon+180)*Math.PI/180;
+return new THREE.Vector3(-(r*Math.sin(phi)*Math.cos(theta)), r*Math.cos(phi), r*Math.sin(phi)*Math.sin(theta));
+}
+const mPos = latLonToVec3(-15.79, -47.88, 1.21);
+const marker = new THREE.Mesh(new THREE.SphereGeometry(0.025,16,16), new THREE.MeshBasicMaterial({color:0x22c55e}));
+marker.position.copy(mPos);
+globe.add(marker);
+const pulseMat = new THREE.MeshBasicMaterial({color:0x22c55e, transparent:true, opacity:0.6, side:THREE.DoubleSide});
+const pulse = new THREE.Mesh(new THREE.RingGeometry(0.03,0.06,32), pulseMat);
+pulse.position.copy(mPos);
+pulse.lookAt(new THREE.Vector3(0,0,0));
+globe.add(pulse);
+
+// Interação mouse + touch
+let isDragging = false, prev = {x:0,y:0}, vel = {x:0,y:0};
+container.addEventListener('mousedown', e => { isDragging=true; prev={x:e.clientX,y:e.clientY}; container.style.cursor='grabbing'; });
+container.addEventListener('mousemove', e => { if(!isDragging) return; vel.y=(e.clientX-prev.x)*0.005; vel.x=(e.clientY-prev.y)*0.005; globe.rotation.y+=vel.y; globe.rotation.x+=vel.x; prev={x:e.clientX,y:e.clientY}; });
+container.addEventListener('mouseup',    () => { isDragging=false; container.style.cursor='grab'; });
+container.addEventListener('mouseleave', () => { isDragging=false; container.style.cursor='grab'; });
+container.addEventListener('touchstart', e => { isDragging=true; prev={x:e.touches[0].clientX,y:e.touches[0].clientY}; });
+container.addEventListener('touchmove',  e => { if(!isDragging) return; e.preventDefault(); globe.rotation.y+=(e.touches[0].clientX-prev.x)*0.005; globe.rotation.x+=(e.touches[0].clientY-prev.y)*0.005; prev={x:e.touches[0].clientX,y:e.touches[0].clientY}; }, {passive:false});
+container.addEventListener('touchend',   () => { isDragging=false; });
+
+// Loop de animação
+let pScale = 1, pGrow = true;
+(function animate(){
+requestAnimationFrame(animate);
+if (!isDragging) {
+globe.rotation.y += 0.002;
+clouds.rotation.y += 0.0004;
+vel.x *= 0.95; vel.y *= 0.95;
+globe.rotation.x += vel.x;
+globe.rotation.y += vel.y;
+}
+if (pGrow) { pScale+=0.02; if(pScale>2.5) pGrow=false; } else { pScale-=0.02; if(pScale<1) pGrow=true; }
+pulse.scale.set(pScale,pScale,pScale);
+pulseMat.opacity = 0.6*(1-(pScale-1)/1.5);
+stars.rotation.y += 0.0001;
+renderer.render(scene, camera);
+})();
+
+window.addEventListener('resize', () => {
+camera.aspect = container.clientWidth / container.clientHeight;
+camera.updateProjectionMatrix();
+renderer.setSize(container.clientWidth, container.clientHeight);
+});
+})();
+</script>
+<!-- FOOTER -->
+<footer>
+<div class="container">
+<div class="foot-grid">
+<div class="foot-col" style="max-width:280px">
+<a href="#inicio" class="logo" style="margin-bottom:14px">
+<span class="logo-mark">⚡</span> NEXUS<span class="dot">.Online</span>
+</a>
+<p>Sites que fazem empresas locais aparecerem e venderem mais no Google Maps.</p>
+</div>
+<div class="foot-col">
+<h4>Navegação</h4>
+<a href="#servicos">Serviços</a>
+<a href="#portfolio">Portfólio</a>
+<a href="#planos">Planos</a>
+<a href="#socios">Sócios</a>
+</div>
+<div class="foot-col">
+<h4>Contato</h4>
+<a href="https://wa.me/5500000000000">WhatsApp</a>
+<a href="mailto:contato@nexus.online">contato@nexus.online</a>
+<p>Tiago, Felipe &amp; Vitor</p>
+</div>
+</div>
+<div class="foot-bottom">
+© 2026 Nexus.Online — Todos os direitos reservados. Feito com ⚡ por Tiago, Felipe e Vitor.
+</div>
+</div>
+</footer>
+<!-- WHATSAPP FLUTUANTE -->
+<a href="https://wa.me/5500000000000?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20um%20or%C3%A7amento." class="wa-float" aria-label="WhatsApp">💬</a>
+<script>
+// Scroll animations
+const observerOptions = {
+threshold: 0.1,
+rootMargin: '0px 0px -50px 0px'
+};
+const observer = new IntersectionObserver((entries) => {
+entries.forEach(entry => {
+if (entry.isIntersecting) {
+entry.target.classList.add('visible');
+}
+});
+}, observerOptions);
+document.querySelectorAll('.animate-on-scroll').forEach(el => {
+observer.observe(el);
+});
+// Particles background
+const particlesContainer = document.getElementById('particles');
+for (let i = 0; i < 30; i++) {
+const particle = document.createElement('div');
+particle.className = 'particle';
+particle.style.left = Math.random() * 100 + '%';
+particle.style.top = Math.random() * 100 + '%';
+particle.style.animationDelay = Math.random() * 6 + 's';
+particle.style.animationDuration = (4 + Math.random() * 4) + 's';
+particlesContainer.appendChild(particle);
+}
+// Smooth scroll for nav links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+anchor.addEventListener('click', function(e) {
+e.preventDefault();
+const target = document.querySelector(this.getAttribute('href'));
+if (target) {
+target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+document.getElementById('navLinks').classList.remove('open');
+}
+});
+});
+// Counter animation for stats
+const animateCounter = (el, target) => {
+let current = 0;
+const increment = target / 50;
+const timer = setInterval(() => {
+current += increment;
+if (current >= target) {
+current = target;
+clearInterval(timer);
+}
+el.textContent = '+' + Math.floor(current);
+}, 30);
+};
+const statsObserver = new IntersectionObserver((entries) => {
+entries.forEach(entry => {
+if (entry.isIntersecting) {
+const numEl = entry.target.querySelector('.num[data-count]');
+if (numEl && !numEl.dataset.animated) {
+numEl.dataset.animated = 'true';
+animateCounter(numEl, parseInt(numEl.dataset.count));
+}
+}
+});
+}, { threshold: 0.5 });
+document.querySelectorAll('.stat').forEach(stat => {
+statsObserver.observe(stat);
+});
+// Parallax effect on hero
+window.addEventListener('scroll', () => {
+const scrolled = window.pageYOffset;
+const hero = document.querySelector('.hero');
+if (hero) {
+hero.style.transform = `translateY(${scrolled * 0.3}px)`;
+}
+});
+// Mouse move effect on cards
+document.querySelectorAll('.port-card, .price-card, .member').forEach(card => {
+card.addEventListener('mousemove', (e) => {
+const rect = card.getBoundingClientRect();
+const x = e.clientX - rect.left;
+const y = e.clientY - rect.top;
+const centerX = rect.width / 2;
+const centerY = rect.height / 2;
+const rotateX = (y - centerY) / 20;
+const rotateY = (centerX - x) / 20;
+card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-8px)`;
+});
+card.addEventListener('mouseleave', () => {
+card.style.transform = '';
+});
+});
+</script>
+</body>
+</html>
